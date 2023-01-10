@@ -5,6 +5,7 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>1486564396-audio_81506.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
