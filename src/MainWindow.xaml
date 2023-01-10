@@ -5,8 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AudioKeepAlive"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        ResizeMode="CanMinimize"
+        Title="Audio Keep Alive" Height="300" Width="600" Icon="/1486564396-audio_81506.ico">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <ListBox x:Name="lbDevices" Margin="10" SelectionChanged="lbDevices_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
+        <StackPanel Orientation="Vertical" Margin="10" Grid.Column="1">
+            <TextBlock Text="Selected device:" Margin="0,0,0,5" FontWeight="Bold" />
+            <TextBlock x:Name="tbSelectedDevice" Text="none" Margin="0,0,0,10" />
+            <TextBlock Text="Sound repeat intervel (milisec):" Margin="0,0,0,10" FontWeight="Bold" />
+            <TextBox x:Name="tbInterval" Text="4000" Margin="0,0,0,10" />
+            <Button x:Name="btnStartStop" Content="Start play" Padding="10" Click="btnStartStop_Click" />
+        </StackPanel>
     </Grid>
 </Window>
