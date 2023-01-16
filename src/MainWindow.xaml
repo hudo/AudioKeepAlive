@@ -25,7 +25,9 @@
             <TextBlock x:Name="tbSelectedDevice" Text="none" Margin="0,0,0,10" />
             <TextBlock Text="Sound repeat intervel (milisec):" Margin="0,0,0,10" FontWeight="Bold" />
             <TextBox x:Name="tbInterval" Text="4000" Margin="0,0,0,10" />
-            <Button x:Name="btnStartStop" Content="Start play" Padding="10" Click="btnStartStop_Click" />
+            <TextBlock Text="Volume:" Margin="0,0,0,10" FontWeight="Bold" />
+            <Slider x:Name="slVolume" Margin="0,0,0,10" Maximum="1" Minimum="0" Value="0.5" />
+            <Button x:Name="btnStartStop" Content="Start ▶️" Padding="10" Click="btnStartStop_Click" />
         </StackPanel>
     </Grid>
 </Window>

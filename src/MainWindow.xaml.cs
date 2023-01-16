@@ -61,14 +61,14 @@ namespace AudioKeepAlive
                 {
                     _isPlaying = false;
                     _timer.Stop();
-                    btnStartStop.Content = "Start play";
+                    btnStartStop.Content = "▶️ Start";
                 }
                 else
                 {
                     _isPlaying = true;
                     _timer.Interval = Convert.ToInt32(tbInterval.Text);
                     _timer.Start();
-                    btnStartStop.Content = "Stop play";
+                    btnStartStop.Content = "⏹️ Stop";
                     Timer_Elapsed(this, null);
                 }
             }
@@ -78,7 +78,7 @@ namespace AudioKeepAlive
         {
             if (_isPlaying && _selected != null)
             {
-                AudioPlaybackEngine.Instance(_selected.Id).PlaySound(_sound);
+                Dispatcher.Invoke(() => AudioPlaybackEngine.Instance(_selected.Id, (float)slVolume.Value).PlaySound(_sound));
             }
         }
     }

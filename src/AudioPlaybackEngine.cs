@@ -9,12 +9,13 @@ namespace AudioKeepAlive
         private readonly IWavePlayer outputDevice;
         private readonly MixingSampleProvider mixer;
 
-        public AudioPlaybackEngine(int deviceId, int sampleRate = 44100, int channelCount = 2)
+        public AudioPlaybackEngine(int deviceId, float volume, int sampleRate = 44100, int channelCount = 2)
         {
             outputDevice = new WaveOutEvent() { DeviceNumber = deviceId };
             mixer = new MixingSampleProvider(WaveFormat.CreateIeeeFloatWaveFormat(sampleRate, channelCount));
             mixer.ReadFully = true;
             outputDevice.Init(mixer);
+            outputDevice.Volume = volume;
             outputDevice.Play();
         }
 
@@ -53,11 +54,20 @@ namespace AudioKeepAlive
         }
 
         private static AudioPlaybackEngine? _instance;
+        private static float _currentVolume;
 
-        public static AudioPlaybackEngine Instance(int deviceId)
+        public static AudioPlaybackEngine Instance(int deviceId, float volume)
         {
+            if(_currentVolume != volume && _instance != null)
+            {
+                _instance.Dispose();
+                _instance = null;
+            }
+
+            _currentVolume = volume;
+
             if (_instance == null)
-                _instance = new AudioPlaybackEngine(deviceId, 44100, 2);
+                _instance = new AudioPlaybackEngine(deviceId, volume, 44100, 2);
 
             return _instance;
         }
